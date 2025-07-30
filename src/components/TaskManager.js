@@ -8,16 +8,16 @@ export default function TaskManager({ user }) {
   const [newTask, setNewTask] = useState("");
   const [file, setFile] = useState(null);
 
+ useEffect(() => {
+  if (!user) return;
   const taskRef = collection(db, "tasks");
+  const q = query(taskRef, where("uid", "==", user.uid));
+  const unsub = onSnapshot(q, (snapshot) => {
+    setTasks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+  });
+  return unsub;
+}, [user]);
 
-  useEffect(() => {
-    if (!user) return;
-    const q = query(taskRef, where("uid", "==", user.uid));
-    const unsub = onSnapshot(q, (snapshot) => {
-      setTasks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    });
-    return unsub;
-  }, [user]);
 
   const addTask = async () => {
     if (!newTask.trim()) return;
