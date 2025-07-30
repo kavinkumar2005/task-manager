@@ -1,136 +1,48 @@
-/* Global Styles */
-html, body, #root {
-  height: 100%;
+body {
   margin: 0;
-  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #ff8a65, #ff5722);
+  min-height: 100vh;
 }
 
-/* Theme Modes (Now applied to entire page) */
-body.dark {
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-  color: white;
-  transition: background 0.5s ease;
-}
-
-body.light {
-  background: linear-gradient(135deg, #d9a7c7, #fffcdc);
-  color: #333;
-  transition: background 0.5s ease;
-}
-
-/* Container */
-.container {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 25px;
-  border-radius: 15px;
-  width: 400px;
-  margin: 50px auto;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  animation: fadeIn 0.8s ease-in-out;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  font-size: 22px;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 8px;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-}
-
-.theme-toggle:hover {
-  transform: rotate(30deg);
-}
-
-/* Task Input */
-.task-input {
+/* Wrapper */
+.app-wrapper {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
-.task-input input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-}
-
-.task-input button {
-  padding: 10px 15px;
-  background: #4CAF50;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 18px;
-  color: white;
-  transition: 0.3s;
-}
-
-.task-input button:hover {
-  background: #3e8e41;
-}
-
-/* Task List */
-.task-list {
-  list-style: none;
-  padding: 0;
-}
-
-.task-item {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 12px 15px;
-  margin-bottom: 10px;
-  border-radius: 8px;
+/* Header */
+.app-header {
+  width: 100%;
+  max-width: 700px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  animation: slideUp 0.4s ease;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.task-item span {
-  font-size: 16px;
+.app-header h1 {
+  margin: 0;
+  color: #ff5722;
 }
 
-/* Delete Button */
-.task-item .delete {
-  background: #ff4444;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+/* Logout Button */
+.logout-btn {
+  background: #f44336;
   color: white;
-  transition: background 0.3s ease;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.task-item .delete:hover {
-  background: #cc0000;
-}
-
-/* Empty State */
-.empty {
-  text-align: center;
-  opacity: 0.8;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.logout-btn:hover {
+  background: #c62828;
 }

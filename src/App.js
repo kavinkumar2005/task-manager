@@ -1,25 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import { auth } from "./firebase";
-import Login from "./components/Login";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import TaskManager from "./components/TaskManager";
+import Login from "./components/Login";
 import "./App.css";
 
 function App() {
   const [user, setUser] = useState(null);
 
+  // ✅ Track user authentication state
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    return unsub;
+    return unsubscribe;
   }, []);
 
   return (
-    <div className="App">
-      <h1>🔥 Task Manager with Firebase</h1>
-      <Login user={user} setUser={setUser} />
-      {user && <TaskManager user={user} />}
+    <div className="app-wrapper">
+      {user ? (
+        <>
+          <header className="app-header">
+            <h1>🔥 Task Manager</h1>
+            <button className="logout-btn" onClick={() => signOut(auth)}>🚪 Logout</button>
+          </header>
+          <TaskManager user={user} />
+        </>
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }
