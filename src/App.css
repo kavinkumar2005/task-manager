@@ -1,22 +1,33 @@
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #c9aa0e, #4c21aa);
-  min-height: 100vh;
+/* Global Styles */
+html, body, #root {
+  height: 100%;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px;
-  color: white;
+  padding: 0;
 }
 
+/* Theme Modes (Now applied to entire page) */
+body.dark {
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  color: white;
+  transition: background 0.5s ease;
+}
+
+body.light {
+  background: linear-gradient(135deg, #d9a7c7, #fffcdc);
+  color: #333;
+  transition: background 0.5s ease;
+}
+
+/* Container */
 .container {
   background: rgba(255, 255, 255, 0.15);
-  padding: 25px 30px;
+  padding: 25px;
   border-radius: 15px;
   width: 400px;
+  margin: 50px auto;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 h1 {
@@ -24,6 +35,24 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 22px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(30deg);
+}
+
+/* Task Input */
 .task-input {
   display: flex;
   gap: 10px;
@@ -40,18 +69,20 @@ h1 {
 
 .task-input button {
   padding: 10px 15px;
-  background: #ffcc00;
+  background: #4CAF50;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  color: white;
   transition: 0.3s;
 }
 
 .task-input button:hover {
-  background: #ffaa00;
+  background: #3e8e41;
 }
 
+/* Task List */
 .task-list {
   list-style: none;
   padding: 0;
@@ -59,18 +90,20 @@ h1 {
 
 .task-item {
   background: rgba(255, 255, 255, 0.1);
-  padding: 10px 15px;
+  padding: 12px 15px;
   margin-bottom: 10px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  animation: slideUp 0.4s ease;
 }
 
 .task-item span {
   font-size: 16px;
 }
 
+/* Delete Button */
 .task-item .delete {
   background: #ff4444;
   border: none;
@@ -78,14 +111,26 @@ h1 {
   border-radius: 5px;
   cursor: pointer;
   color: white;
-  transition: 0.3s;
+  transition: background 0.3s ease;
 }
 
 .task-item .delete:hover {
   background: #cc0000;
 }
 
+/* Empty State */
 .empty {
   text-align: center;
   opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
