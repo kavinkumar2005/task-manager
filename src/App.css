@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #ff8a65, #ff5722);
+  background: linear-gradient(135deg, #2196f3, #00bcd4);
   min-height: 100vh;
 }
 
@@ -29,7 +29,11 @@ body {
 
 .app-header h1 {
   margin: 0;
-  color: #ff5722;
+  color: #2196f3;
+}
+
+.app-header h2 {
+  margin: 0;
 }
 
 /* Logout Button */

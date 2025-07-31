@@ -8,7 +8,6 @@ import "./App.css";
 function App() {
   const [user, setUser] = useState(null);
 
-  // ✅ Track user authentication state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -22,7 +21,12 @@ function App() {
         <>
           <header className="app-header">
             <h1>🔥 Task Manager</h1>
-            <button className="logout-btn" onClick={() => signOut(auth)}>🚪 Logout</button>
+            <h2 style={{ color: "#ff5722", fontWeight: "bold" }}>
+              Welcome, {user.displayName || user.email}
+            </h2>
+            <button className="logout-btn" onClick={() => signOut(auth)}>
+              🚪 Logout
+            </button>
           </header>
           <TaskManager user={user} />
         </>

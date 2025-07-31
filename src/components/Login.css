@@ -1,42 +1,96 @@
 .login-container {
-  height: 100vh;
-  display: flex;
+  height: 80vh;
   justify-content: center;
+  padding: 40px 30px;
   align-items: center;
-  background: linear-gradient(135deg, #ff8a65, #ff5722);
+  background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
   font-family: "Segoe UI", sans-serif;
 }
 
+/* Glass Effect */
 .login-card {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
   padding: 40px 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 350px;
+  width: 360px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* Title */
 .login-card h1 {
-  color: #ff5722;
+  color: #0d47a1;
+  font-size: 24px;
   margin-bottom: 10px;
 }
 
 .login-card p {
-  color: #555;
+  color: #333;
   margin-bottom: 20px;
+  font-size: 14px;
 }
 
+/* Input Fields */
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Main Button */
 .login-btn {
-  background: #ff5722;
+  width: 100%;
+  background: #1565c0;
   color: white;
   border: none;
   padding: 12px 18px;
   font-size: 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
+  margin-top: 10px;
   transition: 0.3s;
 }
 
 .login-btn:hover {
-  background: #e64a19;
+  background: #0d47a1;
+}
+
+/* Divider */
+.divider {
+  margin: 15px 0;
+  color: #777;
+  font-size: 13px;
+}
+
+/* Google Sign-in */
+.google-btn {
+  width: 100%;
+  background: white;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.google-btn:hover {
+  background: #f1f1f1;
 }

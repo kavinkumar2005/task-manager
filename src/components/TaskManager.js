@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { collection, addDoc, query, where, onSnapshot, deleteDoc, doc } from "firebase/firestore";
-import "./TaskManager.css";  // custom styles
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  updateDoc
+} from "firebase/firestore";
+import "./TaskManager.css";
 
 export default function TaskManager({ user }) {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 
-  // ✅ Fetch tasks for logged-in user
   useEffect(() => {
     if (!user) return;
     const taskRef = collection(db, "tasks");
     const q = query(taskRef, where("uid", "==", user.uid));
     const unsub = onSnapshot(q, (snapshot) => {
-      setTasks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      setTasks(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
     });
     return unsub;
   }, [user]);
@@ -24,9 +32,20 @@ export default function TaskManager({ user }) {
     await addDoc(collection(db, "tasks"), {
       uid: user.uid,
       text: newTask,
-      createdAt: new Date()
+      createdAt: new Date(),
+      completed: false,
+      completedAt: null
     });
     setNewTask("");
+  };
+
+  // ✅ Toggle task completion
+  const toggleTask = async (task) => {
+    const taskRef = doc(db, "tasks", task.id);
+    await updateDoc(taskRef, {
+      completed: !task.completed,
+      completedAt: task.completed ? null : new Date()
+    });
   };
 
   // ✅ Delete task
@@ -36,7 +55,7 @@ export default function TaskManager({ user }) {
 
   return (
     <div className="task-container">
-      <h2>📝 Task Manager</h2>
+      <h2>📝 Your Tasks</h2>
 
       <div className="task-input-box">
         <input
@@ -54,8 +73,19 @@ export default function TaskManager({ user }) {
         <ul className="task-list">
           {tasks.map((t) => (
             <li key={t.id} className="task-item">
-              <span>{t.text}</span>
-              <button className="delete" onClick={() => deleteTask(t.id)}>❌</button>
+              <span
+                style={{
+                  textDecoration: t.completed ? "line-through" : "none",
+                  color: t.completed ? "#999" : "#333",
+                  cursor: "pointer"
+                }}
+                onClick={() => toggleTask(t)}
+              >
+                {t.text} {t.completed && ` ✅ (Done on ${new Date(t.completedAt?.seconds * 1000).toLocaleDateString()})`}
+              </span>
+              <button className="delete" onClick={() => deleteTask(t.id)}>
+                ❌
+              </button>
             </li>
           ))}
         </ul>
